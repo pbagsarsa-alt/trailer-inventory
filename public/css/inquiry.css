@@ -1,0 +1,568 @@
+/**
+ * Little River Trailer Inventory — inquiry form styles (Sprint 5.0).
+ *
+ * Loads only where inquiry forms appear. Inherits brand variables from the
+ * single/inventory stylesheets when present; also declares safe fallbacks so
+ * the form looks correct anywhere a shortcode is used.
+ */
+
+.lrti-inquiry-form-wrap {
+	--lrti-primary: var( --lrti-primary, #a8321d );
+	--lrti-primary-dark: var( --lrti-primary-dark, #842615 );
+	--lrti-brand-primary: var( --lrti-brand-primary, #a8321d );
+	--lrti-brand-primary-dark: var( --lrti-brand-primary-dark, #842615 );
+	--lrti-brand-primary-soft: var( --lrti-brand-primary-soft, rgba( 168, 50, 29, 0.18 ) );
+	--lrti-navy: var( --lrti-navy, #101820 );
+	--lrti-border: var( --lrti-border, #e2e2e2 );
+	--lrti-border-light: var( --lrti-border-light, #d9dde3 );
+	--lrti-field-border: var( --lrti-field-border, #cfd4da );
+	--lrti-text-dark: var( --lrti-text-dark, #1b1b1b );
+	--lrti-muted: var( --lrti-muted, #666666 );
+	--lrti-light: var( --lrti-light, #f3f3f3 );
+	--lrti-radius: var( --lrti-radius, 12px );
+
+	background: #ffffff;
+	border: 1px solid var( --lrti-border-light );
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba( 0, 0, 0, 0.05 );
+	padding: 24px;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.lrti-inquiry-form-wrap *,
+.lrti-inquiry-form-wrap *::before,
+.lrti-inquiry-form-wrap *::after {
+	box-sizing: inherit;
+}
+
+.lrti-inquiry-heading {
+	margin: 0 0 14px;
+	font-size: 1.35rem;
+	outline: none;
+}
+
+.lrti-field {
+	margin-bottom: 14px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.lrti-field label {
+	font-weight: 600;
+	font-size: 0.92rem;
+}
+
+.lrti-req {
+	color: var( --lrti-primary );
+}
+
+.lrti-field input[type="text"],
+.lrti-field input[type="email"],
+.lrti-field input[type="tel"],
+.lrti-field select,
+.lrti-field textarea {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid var( --lrti-border );
+	border-radius: 8px;
+	font: inherit;
+	color: #111;
+	background: #fff;
+}
+
+.lrti-field textarea {
+	resize: vertical;
+}
+
+.lrti-field input[aria-invalid="true"],
+.lrti-field textarea[aria-invalid="true"],
+.lrti-field select[aria-invalid="true"] {
+	border-color: var( --lrti-primary );
+	box-shadow: 0 0 0 1px var( --lrti-primary );
+}
+
+.lrti-field-hint {
+	font-size: 0.82rem;
+	color: var( --lrti-muted );
+}
+
+.lrti-field-error {
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var( --lrti-primary-dark );
+	min-height: 0;
+}
+
+.lrti-field-error:empty {
+	display: none;
+}
+
+.lrti-field--consent .lrti-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-weight: 500;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+
+.lrti-field--consent input {
+	margin-top: 3px;
+	flex: 0 0 auto;
+}
+
+.lrti-field--submit {
+	flex-direction: row;
+	align-items: center;
+	gap: 12px;
+}
+
+/* Honeypot: hidden from users, still present for bots. */
+.lrti-hp {
+	position: absolute !important;
+	left: -9999px !important;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.lrti-inquiry-success {
+	background: #e7f4ea;
+	border: 1px solid #2f6f3b;
+	color: #1f4a28;
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin-bottom: 12px;
+	font-weight: 600;
+}
+
+.lrti-inquiry-errorsummary {
+	background: #fbeaea;
+	border: 1px solid var( --lrti-primary );
+	color: var( --lrti-primary-dark );
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin-bottom: 12px;
+	font-weight: 600;
+}
+
+.lrti-inquiry-error {
+	color: var( --lrti-muted );
+	font-style: italic;
+}
+
+/* Loading spinner shown while submitting. */
+.lrti-inquiry-spinner {
+	display: none;
+	width: 20px;
+	height: 20px;
+	border: 3px solid var( --lrti-border );
+	border-top-color: var( --lrti-primary );
+	border-radius: 50%;
+	animation: lrti-inq-spin 0.8s linear infinite;
+}
+
+.lrti-inquiry-form-wrap.is-submitting .lrti-inquiry-spinner {
+	display: inline-block;
+}
+
+.lrti-inquiry-form-wrap.is-submitting .lrti-inquiry-submit {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+@keyframes lrti-inq-spin {
+	to {
+		transform: rotate( 360deg );
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-inquiry-spinner {
+		animation: none;
+	}
+}
+
+.lrti-inquiry-form-wrap :focus-visible {
+	outline: 3px solid var( --lrti-accent, #d4a15a );
+	outline-offset: 2px;
+}
+
+/* ---- Sprint 5.1: compact two-column dealership form --------------------- */
+
+.lrti-inquiry-form-wrap {
+	box-shadow: 0 2px 10px rgba( 17, 17, 17, 0.06 );
+	padding: 20px 22px;
+}
+
+.lrti-inquiry-head {
+	margin-bottom: 14px;
+}
+
+.lrti-inquiry-heading {
+	margin: 0 0 4px;
+	font-size: 1.3rem;
+}
+
+.lrti-inquiry-help {
+	margin: 0;
+	color: var( --lrti-muted );
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.lrti-form-grid {
+	display: grid;
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	gap: 12px 18px;
+}
+
+.lrti-form-grid .lrti-field {
+	margin-bottom: 0;
+}
+
+.lrti-field--full {
+	grid-column: 1 / -1;
+}
+
+.lrti-field--submit {
+	margin-top: 16px;
+	flex-wrap: wrap;
+}
+
+.lrti-inquiry-privacy {
+	flex: 1 1 100%;
+	color: var( --lrti-muted );
+	font-size: 0.8rem;
+	line-height: 1.4;
+	margin-top: 4px;
+}
+
+.lrti-inquiry-privacy a {
+	color: var( --lrti-primary );
+}
+
+/* Stack to a single column on tablet and mobile. */
+@media ( max-width: 680px ) {
+	.lrti-form-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-inquiry-form-wrap {
+		padding: 16px;
+	}
+
+	.lrti-inquiry-submit {
+		width: 100%;
+	}
+}
+
+/* ---- Sprint 5.2: polished, fully-branded form ------------------------- */
+
+/* Heading + accent line + supporting text. */
+.lrti-inquiry-form-wrap .lrti-inquiry-heading {
+	font-size: 22px;
+	font-weight: 700;
+	color: var( --lrti-text-dark );
+	margin: 0 0 6px;
+	padding-bottom: 6px;
+	border-bottom: 3px solid var( --lrti-brand-primary );
+	display: inline-block;
+}
+
+.lrti-inquiry-form-wrap .lrti-inquiry-help {
+	color: var( --lrti-muted );
+	font-size: 0.9rem;
+	line-height: 1.5;
+	margin: 6px 0 16px;
+}
+
+/* Labels. */
+.lrti-inquiry-form-wrap label {
+	font-weight: 600;
+	color: var( --lrti-text-dark );
+	margin-bottom: 6px;
+	display: block;
+}
+
+.lrti-inquiry-form-wrap .lrti-req {
+	color: var( --lrti-brand-primary );
+}
+
+/* Consistent field styling. */
+.lrti-inquiry-form-wrap input[type="text"],
+.lrti-inquiry-form-wrap input[type="email"],
+.lrti-inquiry-form-wrap input[type="tel"],
+.lrti-inquiry-form-wrap select,
+.lrti-inquiry-form-wrap textarea {
+	width: 100%;
+	min-height: 44px;
+	padding: 10px 12px;
+	border: 1px solid var( --lrti-field-border );
+	border-radius: 4px;
+	background: #ffffff;
+	color: var( --lrti-text-dark );
+	font: inherit;
+	box-sizing: border-box;
+}
+
+.lrti-inquiry-form-wrap textarea {
+	min-height: 130px;
+	resize: vertical;
+}
+
+/* Brown-red focus state (no pink). */
+.lrti-inquiry-form-wrap input[type="text"]:focus,
+.lrti-inquiry-form-wrap input[type="email"]:focus,
+.lrti-inquiry-form-wrap input[type="tel"]:focus,
+.lrti-inquiry-form-wrap select:focus,
+.lrti-inquiry-form-wrap textarea:focus {
+	border-color: var( --lrti-brand-primary );
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.18 );
+	outline: none;
+}
+
+/* Consent checkbox. */
+.lrti-inquiry-form-wrap .lrti-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-weight: 500;
+}
+
+.lrti-inquiry-form-wrap .lrti-consent input[type="checkbox"] {
+	min-height: 0;
+	width: auto;
+	margin-top: 3px;
+	accent-color: var( --lrti-brand-primary );
+}
+
+/* Fields grid (existing markup class). */
+.lrti-inquiry-form-wrap .lrti-form-grid {
+	display: grid;
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	gap: 18px 20px;
+}
+
+.lrti-inquiry-form-wrap .lrti-field--full {
+	grid-column: 1 / -1;
+}
+
+/* Submit button — matches the site's brown-red primary CTA. */
+.lrti-inquiry-form-wrap .lrti-inquiry-submit {
+	background: var( --lrti-brand-primary );
+	border: 1px solid var( --lrti-brand-primary );
+	color: #ffffff;
+	border-radius: 5px;
+	font-weight: 700;
+	min-height: 44px;
+	padding: 11px 22px;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.lrti-inquiry-form-wrap .lrti-inquiry-submit:hover,
+.lrti-inquiry-form-wrap .lrti-inquiry-submit:focus {
+	background: var( --lrti-brand-primary-dark );
+	border-color: var( --lrti-brand-primary-dark );
+	color: #ffffff;
+}
+
+.lrti-inquiry-form-wrap .lrti-inquiry-submit:focus-visible {
+	outline: 3px solid var( --lrti-accent, #d4a15a );
+	outline-offset: 2px;
+}
+
+/* Success + error states. */
+.lrti-inquiry-form-wrap .lrti-inquiry-success {
+	background: #e7f4ea;
+	border: 1px solid #2f7d3a;
+	color: #14532d;
+	border-radius: 6px;
+	padding: 12px 14px;
+}
+
+.lrti-inquiry-form-wrap .lrti-inquiry-errorsummary,
+.lrti-inquiry-form-wrap .lrti-field-error {
+	color: #842615;
+}
+
+.lrti-inquiry-form-wrap .lrti-inquiry-errorsummary {
+	background: #fbecea;
+	border: 1px solid var( --lrti-brand-primary );
+	border-radius: 6px;
+	padding: 12px 14px;
+}
+
+/* Mobile: single column, reduced padding, full-width submit. */
+@media ( max-width: 700px ) {
+	.lrti-inquiry-form-wrap {
+		padding: 16px;
+	}
+
+	.lrti-inquiry-form-wrap .lrti-form-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-inquiry-form-wrap .lrti-inquiry-submit {
+		width: 100%;
+	}
+}
+
+/* ======================================================================== *
+ * Sprint 5.3 — authoritative inquiry-form overrides.
+ *
+ * Scoped to .lrti-inquiry-form-card with tightly targeted !important so theme
+ * or Elementor form resets (border:0, background:transparent, appearance:none,
+ * white-on-white buttons, display:none) cannot hide the fields or the submit
+ * button. Literal brand hex used so it is correct in any scope (single page or
+ * [trailer_inquiry] shortcode).
+ * ======================================================================== */
+
+.lrti-inquiry-form-card input[type="text"],
+.lrti-inquiry-form-card input[type="email"],
+.lrti-inquiry-form-card input[type="tel"],
+.lrti-inquiry-form-card input[type="number"],
+.lrti-inquiry-form-card input[type="url"],
+.lrti-inquiry-form-card select,
+.lrti-inquiry-form-card textarea {
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #ffffff !important;
+	border: 1px solid #cfd4da !important;
+	border-radius: 5px !important;
+	color: #1b1b1b !important;
+	width: 100% !important;
+	min-height: 44px;
+	padding: 10px 12px;
+	box-sizing: border-box;
+	opacity: 1 !important;
+	visibility: visible !important;
+	line-height: 1.4;
+	font: inherit;
+}
+
+.lrti-inquiry-form-card textarea {
+	min-height: 130px;
+	resize: vertical;
+}
+
+.lrti-inquiry-form-card input[type="text"]:focus,
+.lrti-inquiry-form-card input[type="email"]:focus,
+.lrti-inquiry-form-card input[type="tel"]:focus,
+.lrti-inquiry-form-card input[type="number"]:focus,
+.lrti-inquiry-form-card input[type="url"]:focus,
+.lrti-inquiry-form-card select:focus,
+.lrti-inquiry-form-card textarea:focus {
+	border-color: #a8321d !important;
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.18 ) !important;
+	outline: none !important;
+}
+
+/* Fields grid — no stretched rows, no fixed heights, no big gaps. */
+.lrti-inquiry-form-card .lrti-inquiry-fields,
+.lrti-inquiry-form-card .lrti-form-grid {
+	display: grid;
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	gap: 18px 20px;
+	align-items: start;
+}
+
+.lrti-inquiry-form-card .lrti-field {
+	margin: 0;
+	min-width: 0;
+}
+
+.lrti-inquiry-form-card .lrti-field--full {
+	grid-column: 1 / -1;
+}
+
+.lrti-inquiry-form-card .lrti-field-error:empty {
+	display: none;
+}
+
+/* Actions row: button always visible, privacy note beside/below it. */
+.lrti-inquiry-form-card .lrti-inquiry-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px 16px;
+	margin-top: 18px;
+}
+
+.lrti-inquiry-form-card .lrti-inquiry-privacy {
+	flex: 1 1 220px;
+	margin: 0;
+	color: #666666;
+	font-size: 0.8rem;
+	line-height: 1.4;
+}
+
+/* Submit button — force the site's brown-red CTA, never white-on-white. */
+.lrti-inquiry-form-card .lrti-inquiry-submit {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	visibility: visible !important;
+	opacity: 1 !important;
+	background-color: #a8321d !important;
+	border: 1px solid #a8321d !important;
+	color: #ffffff !important;
+	border-radius: 5px !important;
+	font-weight: 700;
+	min-height: 44px;
+	padding: 11px 24px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.lrti-inquiry-form-card .lrti-inquiry-submit:hover,
+.lrti-inquiry-form-card .lrti-inquiry-submit:focus {
+	background-color: #842615 !important;
+	border-color: #842615 !important;
+	color: #ffffff !important;
+}
+
+.lrti-inquiry-form-card .lrti-inquiry-submit:focus-visible {
+	outline: 2px solid #a8321d !important;
+	outline-offset: 2px !important;
+}
+
+.lrti-inquiry-form-card .lrti-inquiry-submit[disabled],
+.lrti-inquiry-form-card .lrti-inquiry-submit:disabled {
+	opacity: 0.65 !important;
+	cursor: not-allowed !important;
+}
+
+@media ( max-width: 700px ) {
+	.lrti-inquiry-form-card .lrti-inquiry-fields,
+	.lrti-inquiry-form-card .lrti-form-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-inquiry-form-card .lrti-inquiry-submit {
+		width: 100%;
+	}
+}
+
+/* ---- Sprint 5.3: normal-flow placement (no overlap with price card) ---- */
+
+.lrti-single .lrti-inquiry {
+	clear: both;
+	width: 100%;
+}
+
+.lrti-inquiry-form-card {
+	position: static;
+	float: none;
+	clear: both;
+	width: 100%;
+	max-width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+}

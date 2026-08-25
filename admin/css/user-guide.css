@@ -1,0 +1,402 @@
+/**
+ * TWC Trailer Inventory — User Guide (admin) styles.
+ * Scoped under .lrti-guide. Brand palette only.
+ */
+
+.lrti-guide {
+	--g-brand: #a8321d;
+	--g-brand-dark: #842615;
+	--g-ink: #17212b;
+	--g-muted: #5d6873;
+	--g-border: #d9dee3;
+	--g-soft: #f8f9fa;
+	--g-success: #2e7d32;
+	max-width: 1000px;
+}
+
+.lrti-guide * {
+	box-sizing: border-box;
+}
+
+/* Hero */
+.lrti-guide-hero {
+	background: var( --g-ink );
+	color: #fff;
+	border-radius: 12px;
+	padding: 26px 28px;
+	margin: 16px 0 18px;
+}
+
+.lrti-guide-title {
+	margin: 0 0 6px;
+	color: #fff;
+	font-size: 26px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.lrti-guide-sub {
+	margin: 0 0 8px;
+	color: #e8ebee;
+	font-size: 15px;
+}
+
+.lrti-guide-meta {
+	margin: 0;
+	color: #b9c1c9;
+	font-size: 12px;
+}
+
+/* Search */
+.lrti-guide-searchbar {
+	position: relative;
+	margin-bottom: 8px;
+}
+
+.lrti-guide-searchbar .dashicons {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY( -50% );
+	color: var( --g-muted );
+}
+
+.lrti-guide-search {
+	width: 100%;
+	padding: 12px 14px 12px 38px !important;
+	border: 1px solid var( --g-border );
+	border-radius: 8px;
+	font-size: 15px;
+}
+
+.lrti-guide-search:focus {
+	border-color: var( --g-brand );
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.15 );
+	outline: none;
+}
+
+.lrti-guide-noresult {
+	color: var( --g-muted );
+	font-style: italic;
+	padding: 8px 2px;
+}
+
+/* Cards */
+.lrti-guide-card {
+	background: #fff;
+	border: 1px solid var( --g-border );
+	border-radius: 12px;
+	padding: 22px 24px;
+	margin: 0 0 18px;
+}
+
+.lrti-guide-card > h2 {
+	margin: 0 0 12px;
+	font-size: 20px;
+	color: var( --g-ink );
+	border-bottom: 2px solid var( --g-brand );
+	padding-bottom: 8px;
+	display: inline-block;
+}
+
+.lrti-guide-quick {
+	margin: 10px 0 0 18px;
+	line-height: 1.9;
+}
+
+.lrti-guide-tip {
+	background: var( --g-soft );
+	border-left: 3px solid var( --g-brand );
+	padding: 10px 12px;
+	border-radius: 4px;
+	margin: 12px 0 0;
+	color: var( --g-ink );
+}
+
+/* Accordions */
+.lrti-guide-acc {
+	border: 1px solid var( --g-border );
+	border-radius: 8px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.lrti-guide-acc-head {
+	margin: 0;
+}
+
+.lrti-guide-acc-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	background: var( --g-soft );
+	border: none;
+	padding: 14px 16px;
+	cursor: pointer;
+	text-align: left;
+	font-size: 15px;
+	font-weight: 600;
+	color: var( --g-ink );
+}
+
+.lrti-guide-acc-btn:hover {
+	background: #eef1f4;
+}
+
+.lrti-guide-acc-btn:focus-visible {
+	outline: 2px solid var( --g-brand );
+	outline-offset: -2px;
+}
+
+.lrti-guide-acc-icon {
+	transition: transform 0.2s ease;
+	color: var( --g-muted );
+	flex: 0 0 auto;
+}
+
+.lrti-guide-acc.is-open .lrti-guide-acc-icon {
+	transform: rotate( 180deg );
+}
+
+.lrti-guide-acc-inner {
+	padding: 14px 16px;
+	line-height: 1.7;
+	color: var( --g-ink );
+}
+
+.lrti-guide-acc-inner ol,
+.lrti-guide-acc-inner ul {
+	margin: 6px 0 6px 20px;
+	line-height: 1.8;
+}
+
+/* Flow diagram */
+.lrti-guide-flow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 12px 0;
+}
+
+.lrti-guide-flow-step {
+	background: var( --g-ink );
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 6px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.lrti-guide-flow-arrow {
+	color: var( --g-brand );
+}
+
+/* Shortcodes */
+.lrti-guide-sc-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.lrti-guide-copyall {
+	background: var( --g-brand ) !important;
+	border-color: var( --g-brand ) !important;
+	color: #fff !important;
+}
+
+.lrti-guide-copyall:hover {
+	background: var( --g-brand-dark ) !important;
+	border-color: var( --g-brand-dark ) !important;
+}
+
+.lrti-guide-sc-group {
+	margin: 18px 0 10px;
+	font-size: 15px;
+	color: var( --g-muted );
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.lrti-guide-sc {
+	border: 1px solid var( --g-border );
+	border-radius: 10px;
+	padding: 16px;
+	margin-bottom: 14px;
+	background: #fff;
+}
+
+.lrti-guide-sc-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 8px;
+}
+
+.lrti-guide-sc-tag {
+	font-size: 15px;
+	font-weight: 700;
+	color: var( --g-brand );
+	background: rgba( 168, 50, 29, 0.08 );
+	padding: 4px 8px;
+	border-radius: 5px;
+}
+
+.lrti-guide-sc-what {
+	margin: 4px 0;
+	font-weight: 600;
+	color: var( --g-ink );
+}
+
+.lrti-guide-sc-where {
+	margin: 4px 0 10px;
+	color: var( --g-muted );
+}
+
+.lrti-guide-sc-subhead {
+	margin: 12px 0 6px;
+	font-weight: 700;
+	color: var( --g-ink );
+}
+
+.lrti-guide-sc-example {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var( --g-soft );
+	border: 1px solid var( --g-border );
+	border-radius: 6px;
+	padding: 8px 10px;
+	margin: 8px 0;
+	overflow-x: auto;
+}
+
+.lrti-guide-sc-example code {
+	background: none;
+	color: var( --g-ink );
+	font-size: 13px;
+	white-space: nowrap;
+}
+
+.lrti-guide-sc-attrs {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 6px 0;
+	font-size: 13px;
+}
+
+.lrti-guide-sc-attrs th,
+.lrti-guide-sc-attrs td {
+	text-align: left;
+	padding: 7px 10px;
+	border-bottom: 1px solid var( --g-border );
+	vertical-align: top;
+}
+
+.lrti-guide-sc-attrs th {
+	background: var( --g-soft );
+	color: var( --g-muted );
+	font-weight: 700;
+}
+
+.lrti-guide-sc-attrs code {
+	background: rgba( 168, 50, 29, 0.06 );
+	color: var( --g-brand-dark );
+	padding: 1px 5px;
+	border-radius: 3px;
+}
+
+.lrti-guide-muted {
+	color: #aab2ba;
+}
+
+.lrti-guide-sc-note {
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+	margin: 8px 0 0;
+	color: var( --g-muted );
+	font-size: 13px;
+}
+
+.lrti-guide-sc-note .dashicons {
+	color: var( --g-brand );
+	flex: 0 0 auto;
+}
+
+/* Copy buttons */
+.lrti-guide-copy {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	border: 1px solid var( --g-brand );
+	background: #fff;
+	color: var( --g-brand );
+	border-radius: 6px;
+	padding: 5px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	flex: 0 0 auto;
+	white-space: nowrap;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lrti-guide-copy:hover,
+.lrti-guide-copy:focus-visible {
+	background: var( --g-brand );
+	color: #fff;
+	outline: none;
+}
+
+.lrti-guide-copy .dashicons {
+	width: 15px;
+	height: 15px;
+	font-size: 15px;
+}
+
+.lrti-guide-copy.is-copied {
+	background: var( --g-success );
+	border-color: var( --g-success );
+	color: #fff;
+}
+
+/* Support */
+.lrti-guide-support-list {
+	list-style: none;
+	margin: 8px 0;
+	padding: 0;
+	line-height: 2;
+}
+
+.lrti-guide-support-list .dashicons {
+	color: var( --g-brand );
+	margin-right: 6px;
+}
+
+.lrti-guide-credit {
+	color: var( --g-muted );
+	font-size: 13px;
+	margin-top: 10px;
+}
+
+/* Reduced motion */
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-guide-acc-icon,
+	.lrti-guide-copy {
+		transition: none;
+	}
+}
+
+/* Small screens */
+@media ( max-width: 782px ) {
+	.lrti-guide-sc-attrs {
+		display: block;
+		overflow-x: auto;
+	}
+}

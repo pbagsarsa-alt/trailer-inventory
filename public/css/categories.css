@@ -1,0 +1,146 @@
+/**
+ * TWC Trailer Inventory — homepage trailer category grid.
+ * Scoped under .twc-trailer-categories; brand palette only.
+ */
+
+.twc-trailer-categories {
+	--twc-brand: #a8321d;
+	--twc-brand-dark: #842615;
+	--twc-cat-cols: 4;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 8px 0;
+}
+
+.twc-cat-header {
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.twc-cat-eyebrow {
+	display: block;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var( --twc-brand );
+	margin-bottom: 6px;
+}
+
+.twc-cat-title {
+	margin: 0;
+	font-size: 30px;
+	line-height: 1.2;
+	font-weight: 700;
+	color: #111820;
+}
+
+.twc-cat-grid {
+	display: grid;
+	grid-template-columns: repeat( var( --twc-cat-cols ), 1fr );
+	gap: 20px;
+}
+
+.twc-cat-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 1px 3px rgba( 17, 24, 32, 0.10 );
+	text-decoration: none;
+	color: inherit;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.twc-cat-card:hover,
+.twc-cat-card:focus-visible {
+	transform: translateY( -4px );
+	box-shadow: 0 10px 24px rgba( 17, 24, 32, 0.16 );
+	outline: none;
+}
+
+.twc-cat-card:focus-visible {
+	box-shadow: 0 0 0 3px rgba( 168, 50, 29, 0.35 ), 0 10px 24px rgba( 17, 24, 32, 0.16 );
+}
+
+.twc-cat-media {
+	display: block;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	background: #f1f2f4;
+}
+
+.twc-cat-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	transition: transform 0.3s ease;
+}
+
+.twc-cat-card:hover .twc-cat-img,
+.twc-cat-card:focus-visible .twc-cat-img {
+	transform: scale( 1.05 );
+}
+
+.twc-cat-footer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 14px 16px;
+	background: var( --twc-brand );
+	color: #fff;
+	transition: background 0.2s ease;
+}
+
+.twc-cat-card:hover .twc-cat-footer,
+.twc-cat-card:focus-visible .twc-cat-footer {
+	background: var( --twc-brand-dark );
+}
+
+.twc-cat-icon.dashicons {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	flex: 0 0 auto;
+}
+
+.twc-cat-label {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+/* Tablet: two columns. */
+@media ( max-width: 1024px ) {
+	.twc-cat-grid {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+/* Mobile: one column. */
+@media ( max-width: 600px ) {
+	.twc-cat-grid {
+		grid-template-columns: 1fr;
+	}
+	.twc-cat-title {
+		font-size: 24px;
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.twc-cat-card,
+	.twc-cat-img {
+		transition: none;
+	}
+	.twc-cat-card:hover,
+	.twc-cat-card:focus-visible {
+		transform: none;
+	}
+	.twc-cat-card:hover .twc-cat-img {
+		transform: none;
+	}
+}

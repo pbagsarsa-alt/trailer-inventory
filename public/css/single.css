@@ -1,0 +1,954 @@
+/**
+ * Little River Trailer Inventory — single trailer detail styles (Sprint 4.2).
+ *
+ * Loads only on single trailer pages. Brand variables are inherited from
+ * inventory.css (shared .lrti-single scope). Prefixed with "lrti-".
+ */
+
+.lrti-single {
+	color: var( --lrti-dark );
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	line-height: 1.55;
+	padding-bottom: 56px;
+	box-sizing: border-box;
+}
+
+.lrti-single *,
+.lrti-single *::before,
+.lrti-single *::after {
+	box-sizing: inherit;
+}
+
+/* ---- Breadcrumbs -------------------------------------------------------- */
+
+.lrti-breadcrumbs {
+	padding: 18px 0 6px;
+	font-size: 0.85rem;
+}
+
+.lrti-breadcrumbs-list {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+}
+
+.lrti-breadcrumbs-list a {
+	color: var( --lrti-primary );
+	text-decoration: none;
+}
+
+.lrti-breadcrumbs-list a:hover,
+.lrti-breadcrumbs-list a:focus {
+	text-decoration: underline;
+}
+
+.lrti-breadcrumb-sep {
+	margin-left: 6px;
+	color: var( --lrti-muted );
+}
+
+.lrti-breadcrumb-item [aria-current="page"] {
+	color: var( --lrti-muted );
+}
+
+/* ---- Header ------------------------------------------------------------- */
+
+.lrti-single-header {
+	margin: 10px 0 20px;
+}
+
+.lrti-single-title {
+	margin: 0 0 10px;
+	font-size: 1.9rem;
+	line-height: 1.15;
+	color: var( --lrti-dark );
+}
+
+.lrti-single-manufacturer {
+	margin: 6px 0 10px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.3;
+	overflow-wrap: anywhere;
+}
+
+.lrti-single-manufacturer .label {
+	color: #111;
+	margin-right: 4px;
+}
+
+.lrti-single-manufacturer .value {
+	color: var( --lrti-primary, #a8321d );
+	font-weight: 700;
+}
+
+.lrti-single-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.lrti-single-stock {
+	margin: 0;
+	color: var( --lrti-muted );
+	font-size: 0.9rem;
+}
+
+.lrti-badge--cond {
+	background: var( --lrti-navy );
+}
+
+/* ---- Two-column layout -------------------------------------------------- */
+
+.lrti-single-cols {
+	display: grid;
+	grid-template-columns: minmax( 0, 1.7fr ) minmax( 320px, 1fr );
+	gap: 32px;
+	align-items: start;
+	margin-bottom: 32px;
+}
+
+.lrti-col-gallery,
+.lrti-col-summary {
+	min-width: 0;
+}
+
+@media ( max-width: 1100px ) {
+	.lrti-single-cols {
+		grid-template-columns: minmax( 0, 1.4fr ) minmax( 280px, 1fr );
+		gap: 24px;
+	}
+}
+
+/* ---- Gallery ------------------------------------------------------------ */
+
+.lrti-gallery-single {
+	width: 100%;
+}
+
+.lrti-gallery-stage {
+	position: relative;
+	background: var( --lrti-light );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	overflow: hidden;
+	aspect-ratio: var( --lrti-gallery-aspect, 4 / 3 );
+}
+
+.lrti-gallery-open {
+	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	background: none;
+	overflow: hidden;
+	cursor: zoom-in;
+}
+
+.lrti-stage-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: var( --lrti-gallery-pos, center center );
+	display: block;
+}
+
+.lrti-gallery-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var( --lrti-light );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	aspect-ratio: var( --lrti-gallery-aspect, 4 / 3 );
+	color: var( --lrti-navy );
+}
+
+.lrti-gallery-empty .lrti-card-img--placeholder svg {
+	width: 45%;
+}
+
+.lrti-gallery-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY( -50% );
+	width: 44px;
+	height: 44px;
+	border: 1px solid var( --lrti-brand-primary, #a8321d );
+	border-radius: 4px;
+	background: rgba( 168, 50, 29, 0.92 );
+	color: #ffffff;
+	font-size: 26px;
+	line-height: 1;
+	cursor: pointer;
+	z-index: 2;
+	box-sizing: border-box;
+}
+
+.lrti-gallery-prev {
+	left: 12px;
+}
+
+.lrti-gallery-next {
+	right: 12px;
+}
+
+.lrti-gallery-nav:hover,
+.lrti-gallery-nav:focus {
+	background: var( --lrti-brand-primary-dark, #842615 );
+	border-color: var( --lrti-brand-primary-dark, #842615 );
+	color: #ffffff;
+}
+
+.lrti-gallery-nav:focus-visible {
+	outline: 2px solid var( --lrti-brand-primary, #a8321d );
+	outline-offset: 2px;
+}
+
+.lrti-gallery-thumbs {
+	list-style: none;
+	display: flex;
+	gap: 8px;
+	margin: 10px 0 0;
+	padding: 4px 2px 8px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-snap-type: x proximity;
+	-webkit-overflow-scrolling: touch;
+}
+
+.lrti-gallery-thumb-item {
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+}
+
+.lrti-gallery-thumb {
+	box-sizing: border-box;
+	width: 72px;
+	height: 56px;
+	padding: 0;
+	border: 1px solid #d7d7d7;
+	border-radius: 6px;
+	overflow: hidden;
+	background: var( --lrti-light );
+	cursor: pointer;
+}
+
+.lrti-gallery-thumb:hover {
+	border-color: var( --lrti-brand-primary, #a8321d );
+}
+
+.lrti-gallery-thumb.is-active {
+	border: 2px solid var( --lrti-brand-primary, #a8321d );
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.18 );
+}
+
+.lrti-gallery-thumb:focus-visible {
+	outline: 2px solid var( --lrti-brand-primary, #a8321d );
+	outline-offset: 2px;
+}
+
+.lrti-thumb-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+	display: block;
+}
+
+@media ( max-width: 480px ) {
+	.lrti-gallery-thumb {
+		width: 64px;
+		height: 50px;
+	}
+}
+
+/* ---- Lightbox ----------------------------------------------------------- */
+
+.lrti-lightbox {
+	position: fixed;
+	inset: 0;
+	background: rgba( 17, 17, 17, 0.9 );
+	z-index: 100000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.lrti-lightbox[hidden] {
+	display: none;
+}
+
+.lrti-lightbox-inner {
+	position: relative;
+	max-width: 92vw;
+	max-height: 88vh;
+}
+
+.lrti-lightbox-img {
+	max-width: 92vw;
+	max-height: 88vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	object-position: center center;
+	display: block;
+	border-radius: 6px;
+}
+
+.lrti-lightbox-close {
+	position: absolute;
+	top: -46px;
+	right: 0;
+	width: 40px;
+	height: 40px;
+	border: 1px solid var( --lrti-brand-primary, #a8321d );
+	border-radius: 4px;
+	background: rgba( 168, 50, 29, 0.92 );
+	color: #fff;
+	font-size: 24px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.lrti-lightbox-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY( -50% );
+	width: 48px;
+	height: 48px;
+	border: 1px solid var( --lrti-brand-primary, #a8321d );
+	border-radius: 4px;
+	background: rgba( 168, 50, 29, 0.92 );
+	color: #fff;
+	font-size: 28px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.lrti-lightbox-prev {
+	left: -60px;
+}
+
+.lrti-lightbox-next {
+	right: -60px;
+}
+
+.lrti-lightbox-close:hover,
+.lrti-lightbox-close:focus,
+.lrti-lightbox-nav:hover,
+.lrti-lightbox-nav:focus {
+	background: var( --lrti-brand-primary-dark, #842615 );
+	border-color: var( --lrti-brand-primary-dark, #842615 );
+	color: #fff;
+}
+
+.lrti-lightbox-close:focus-visible,
+.lrti-lightbox-nav:focus-visible {
+	outline: 2px solid #ffffff;
+	outline-offset: 2px;
+}
+
+/* ---- Pricing ------------------------------------------------------------ */
+
+.lrti-pricing {
+	background: var( --lrti-white );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	padding: 20px;
+	box-shadow: var( --lrti-shadow );
+}
+
+.lrti-pricing-amount {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 10px;
+}
+
+.lrti-pricing .lrti-price {
+	font-size: 2rem;
+	font-weight: 800;
+	color: var( --lrti-primary );
+}
+
+.lrti-pricing .lrti-price--sold,
+.lrti-pricing .lrti-price--call {
+	color: var( --lrti-navy );
+}
+
+.lrti-price-was {
+	font-size: 1.1rem;
+	font-weight: 500;
+	color: var( --lrti-muted );
+	text-decoration: line-through;
+}
+
+.lrti-price-msrp {
+	display: block;
+	width: 100%;
+	font-size: 0.85rem;
+	color: var( --lrti-muted );
+}
+
+.lrti-savings {
+	margin: 8px 0 0;
+	font-weight: 700;
+	color: #2f6f3b;
+}
+
+.lrti-cta-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 16px;
+}
+
+/* ---- Buttons (single-page variants) ------------------------------------- */
+
+.lrti-btn--outline {
+	background: transparent;
+	color: var( --lrti-primary );
+	border-color: var( --lrti-primary );
+}
+
+.lrti-btn--outline:hover,
+.lrti-btn--outline:focus {
+	background: var( --lrti-primary );
+	color: #fff;
+}
+
+.lrti-cta {
+	width: 100%;
+	padding: 12px 16px;
+	font-size: 0.95rem;
+}
+
+/* ---- Quick specs -------------------------------------------------------- */
+
+.lrti-quickspecs {
+	margin-top: 20px;
+	background: var( --lrti-white );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	padding: 16px 20px;
+	box-shadow: var( --lrti-shadow );
+}
+
+.lrti-section-title {
+	font-size: 1.3rem;
+	margin: 0 0 14px;
+	padding-bottom: 8px;
+	border-bottom: 2px solid var( --lrti-accent );
+}
+
+.lrti-section-title--sm {
+	font-size: 1.05rem;
+}
+
+.lrti-quickspecs-list {
+	margin: 0;
+}
+
+.lrti-quickspecs-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 6px 0;
+	border-bottom: 1px solid var( --lrti-border );
+}
+
+.lrti-quickspecs-row:last-child {
+	border-bottom: 0;
+}
+
+.lrti-quickspecs-row dt {
+	color: var( --lrti-muted );
+	font-weight: 600;
+}
+
+.lrti-quickspecs-row dd {
+	margin: 0;
+	font-weight: 700;
+	text-align: right;
+}
+
+/* ---- Sections (description, specs, features, financing, dealer) --------- */
+
+.lrti-description,
+.lrti-specs,
+.lrti-features,
+.lrti-financing,
+.lrti-inquiry,
+.lrti-dealer,
+.lrti-related {
+	margin-top: 36px;
+}
+
+.lrti-description-lead {
+	font-size: 1.05rem;
+	color: var( --lrti-dark );
+	margin-bottom: 12px;
+}
+
+.lrti-description-body {
+	line-height: 1.7;
+}
+
+/* Full specifications */
+.lrti-specs-groups {
+	display: grid;
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	gap: 24px;
+}
+
+.lrti-specs-group-title {
+	font-size: 1.05rem;
+	margin: 0 0 8px;
+	color: var( --lrti-primary );
+}
+
+.lrti-specs-list {
+	margin: 0;
+}
+
+.lrti-specs-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 7px 0;
+	border-bottom: 1px solid var( --lrti-border );
+}
+
+.lrti-specs-row dt {
+	color: var( --lrti-muted );
+	font-weight: 600;
+}
+
+.lrti-specs-row dd {
+	margin: 0;
+	font-weight: 700;
+	text-align: right;
+}
+
+/* Features */
+.lrti-features-grid {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+}
+
+.lrti-feature {
+	background: var( --lrti-light );
+	border: 1px solid var( --lrti-border );
+	border-radius: 999px;
+	padding: 6px 14px;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+/* Financing */
+.lrti-financing-box {
+	background: #fbf4e8;
+	border: 1px solid var( --lrti-accent );
+	border-left-width: 5px;
+	border-radius: var( --lrti-radius );
+	padding: 16px 20px;
+}
+
+/* Inquiry placeholder */
+.lrti-inquiry-note {
+	background: var( --lrti-light );
+	border: 1px dashed var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	padding: 20px;
+}
+
+/* Dealer contact */
+.lrti-dealer {
+	display: grid;
+	grid-template-columns: minmax( 0, 1.4fr ) minmax( 0, 1fr );
+	gap: 24px;
+	background: var( --lrti-navy );
+	color: #fff;
+	border-radius: var( --lrti-radius );
+	padding: 24px;
+	align-items: center;
+}
+
+.lrti-dealer .lrti-section-title {
+	color: #fff;
+}
+
+.lrti-dealer-address {
+	font-style: normal;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.lrti-dealer-address a {
+	color: var( --lrti-accent );
+	text-decoration: none;
+}
+
+.lrti-dealer-address a:hover,
+.lrti-dealer-address a:focus {
+	text-decoration: underline;
+}
+
+.lrti-dealer-message {
+	margin: 12px 0 0;
+	color: rgba( 255, 255, 255, 0.85 );
+}
+
+.lrti-dealer-cta {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.lrti-dealer-cta .lrti-btn--outline {
+	color: #fff;
+	border-color: rgba( 255, 255, 255, 0.7 );
+}
+
+.lrti-dealer-cta .lrti-btn--outline:hover,
+.lrti-dealer-cta .lrti-btn--outline:focus {
+	background: #fff;
+	color: var( --lrti-navy );
+}
+
+/* Related uses shared .lrti-card from inventory.css; enforce a 3/2/1 row. */
+.lrti-grid--related {
+	margin-top: 4px;
+	display: grid;
+	grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
+	gap: 20px;
+}
+
+@media ( max-width: 900px ) {
+	.lrti-grid--related {
+		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	}
+}
+
+@media ( max-width: 560px ) {
+	.lrti-grid--related {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---- Focus & a11y ------------------------------------------------------- */
+
+.lrti-single a:focus-visible,
+.lrti-single button:focus-visible {
+	outline: 3px solid var( --lrti-accent );
+	outline-offset: 2px;
+}
+
+/* ---- Responsive --------------------------------------------------------- */
+
+@media ( max-width: 850px ) {
+	.lrti-single-cols {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.lrti-specs-groups {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-dealer {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-lightbox-prev {
+		left: 6px;
+	}
+
+	.lrti-lightbox-next {
+		right: 6px;
+	}
+}
+
+@media ( max-width: 560px ) {
+	.lrti-single-title {
+		font-size: 1.5rem;
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-gallery-nav,
+	.lrti-lightbox-nav {
+		transition: none;
+	}
+}
+
+/* ---- Sprint 4.4: features as an accessible checklist -------------------- */
+
+.lrti-features-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 220px, 1fr ) );
+	gap: 8px 16px;
+}
+
+.lrti-feature {
+	position: relative;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	padding: 4px 4px 4px 26px;
+	font-weight: 500;
+}
+
+.lrti-feature::before {
+	content: "";
+	position: absolute;
+	left: 2px;
+	top: 50%;
+	width: 16px;
+	height: 16px;
+	margin-top: -8px;
+	border-radius: 50%;
+	background: #2f6f3b;
+}
+
+.lrti-feature::after {
+	content: "";
+	position: absolute;
+	left: 7px;
+	top: 50%;
+	width: 4px;
+	height: 8px;
+	margin-top: -6px;
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+	transform: rotate( 45deg );
+}
+
+/* ---- Sprint 5.1: tighter, consistent section spacing -------------------- */
+
+.lrti-description,
+.lrti-specs,
+.lrti-features,
+.lrti-financing,
+.lrti-inquiry,
+.lrti-dealer,
+.lrti-related {
+	margin-top: 40px;
+}
+
+.lrti-specs-groups {
+	gap: 24px 40px;
+}
+
+.lrti-specs-group-title {
+	border-bottom: 2px solid var( --lrti-accent );
+	padding-bottom: 4px;
+	margin-bottom: 10px;
+}
+
+/* Optional sticky price card (opt-in via the lrti_single_price_card_sticky
+   filter, which adds the .lrti-price-sticky class). Desktop only. */
+@media ( min-width: 851px ) {
+	.lrti-price-sticky .lrti-pricing {
+		position: sticky;
+		top: 48px;
+	}
+}
+
+/* Ensure badges never overlap on the card/summary. */
+.lrti-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+/* ---- Sprint 5.1: plain-line short description list ---------------------- */
+
+.lrti-description-list {
+	margin: 0 0 12px;
+	padding-left: 20px;
+	line-height: 1.7;
+}
+
+.lrti-description-list li {
+	margin-bottom: 2px;
+}
+
+/* ======================================================================== *
+ * Sprint 5.3 — authoritative gallery overrides.
+ *
+ * These rules are intentionally high-specificity and scoped to the plugin's
+ * single-trailer wrapper, with tightly targeted !important on ONLY the
+ * properties a theme/Elementor tends to override (color, background, border,
+ * outline, box-shadow). Literal brand hex values are used so the result is
+ * correct even outside the variable scope. This block is last in the file, so
+ * it also wins over any earlier plugin rule at equal specificity.
+ * ======================================================================== */
+
+/* Navigation buttons (stage + generic variants). */
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav,
+.lrti-single .lrti-gallery-stage .lrti-gallery-prev,
+.lrti-single .lrti-gallery-stage .lrti-gallery-next,
+.lrti-single .lrti-gallery-stage .lrti-gallery-arrow {
+	background-color: #a8321d !important;
+	border: 1px solid #a8321d !important;
+	color: #ffffff !important;
+	border-radius: 4px !important;
+}
+
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav:hover,
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav:focus,
+.lrti-single .lrti-gallery-stage .lrti-gallery-prev:hover,
+.lrti-single .lrti-gallery-stage .lrti-gallery-prev:focus,
+.lrti-single .lrti-gallery-stage .lrti-gallery-next:hover,
+.lrti-single .lrti-gallery-stage .lrti-gallery-next:focus {
+	background-color: #842615 !important;
+	border-color: #842615 !important;
+	color: #ffffff !important;
+}
+
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav:focus-visible {
+	outline: 2px solid #a8321d !important;
+	outline-offset: 2px !important;
+}
+
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav[disabled],
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav:disabled {
+	opacity: 0.45 !important;
+	cursor: not-allowed !important;
+}
+
+.lrti-single .lrti-gallery-stage .lrti-gallery-nav svg {
+	fill: currentColor !important;
+	stroke: currentColor !important;
+}
+
+/* Thumbnails — inactive, hover, active (every active mechanism), focus. */
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb {
+	border: 1px solid #d9dde3 !important;
+	background: #ffffff !important;
+	box-shadow: none !important;
+	outline: none;
+}
+
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb:hover {
+	border-color: #a8321d !important;
+}
+
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb.is-active,
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb.active,
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb[aria-current="true"],
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb[aria-selected="true"] {
+	border: 2px solid #a8321d !important;
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.18 ) !important;
+}
+
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb:focus-visible {
+	outline: 2px solid #a8321d !important;
+	outline-offset: 2px !important;
+}
+
+/* Lightbox controls. */
+.lrti-single .lrti-lightbox-close,
+.lrti-single .lrti-lightbox-nav {
+	background-color: #a8321d !important;
+	border: 1px solid #a8321d !important;
+	color: #ffffff !important;
+}
+
+.lrti-single .lrti-lightbox-close:hover,
+.lrti-single .lrti-lightbox-close:focus,
+.lrti-single .lrti-lightbox-nav:hover,
+.lrti-single .lrti-lightbox-nav:focus {
+	background-color: #842615 !important;
+	border-color: #842615 !important;
+	color: #ffffff !important;
+}
+
+.lrti-single .lrti-lightbox-img {
+	object-fit: contain !important;
+	object-position: center center !important;
+}
+
+/* Stage stability + smooth opacity swap (no layout animation). */
+.lrti-single .lrti-gallery-stage {
+	contain: layout paint;
+}
+
+.lrti-single .lrti-stage-img {
+	object-fit: cover !important;
+	object-position: center center !important;
+	transition: opacity 220ms ease;
+}
+
+.lrti-single .lrti-gallery-stage.lrti-gallery-is-loading .lrti-stage-img {
+	opacity: 0.4;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-single .lrti-stage-img {
+		transition: none;
+	}
+}
+
+/* ======================================================================== *
+ * Sprint 2.0.0 — main-image frame neutralization.
+ *
+ * The pink "border" around the main image is the theme/Elementor accent color
+ * applied to the .lrti-gallery-open button (focus/active) and to the stage.
+ * Neutralize it: no permanent border color from the theme, neutral frame,
+ * red-brown ring only on keyboard focus. Scoped to the plugin gallery wrapper.
+ * ======================================================================== */
+
+.lrti-single .lrti-gallery-stage {
+	border: 1px solid #d7dce1 !important;
+}
+
+.lrti-single .lrti-gallery-open,
+.lrti-single .lrti-gallery-open:hover,
+.lrti-single .lrti-gallery-open:active,
+.lrti-single .lrti-gallery-open:focus {
+	border: 0 !important;
+	outline: none !important;
+	box-shadow: none !important;
+	background: none !important;
+}
+
+/* Keyboard focus only: subtle red-brown ring, never pink. */
+.lrti-single .lrti-gallery-open:focus-visible {
+	outline: 2px solid #a8321d !important;
+	outline-offset: -2px !important;
+}
+
+.lrti-single .lrti-stage-img {
+	border: 0 !important;
+	outline: none !important;
+}
+
+/* Neutral default thumbnail border to match the spec. */
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb {
+	border: 1px solid #d7dce1 !important;
+}
+
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb.is-active,
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb.active,
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb[aria-current="true"],
+.lrti-single .lrti-gallery-thumbs .lrti-gallery-thumb[aria-selected="true"] {
+	border: 2px solid #a8321d !important;
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.18 ) !important;
+}

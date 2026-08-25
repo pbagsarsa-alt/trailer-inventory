@@ -1,0 +1,1444 @@
+/**
+ * Little River Trailer Inventory — front-end archive styles (Sprint 4.1).
+ *
+ * Self-contained, prefixed with "lrti-", and independent of theme styles.
+ * Brand colors are exposed as CSS custom properties so they can be changed in
+ * one place.
+ */
+
+.lrti-archive,
+.lrti-single {
+	--lrti-primary: #a8321d;
+	--lrti-primary-dark: #842615;
+	--lrti-brand-primary: #a8321d;
+	--lrti-brand-primary-dark: #842615;
+	--lrti-brand-primary-soft: rgba( 168, 50, 29, 0.18 );
+	--lrti-dark: #111111;
+	--lrti-navy: #101820;
+	--lrti-accent: #d4a15a;
+	--lrti-light: #f3f3f3;
+	--lrti-white: #ffffff;
+	--lrti-border: #e2e2e2;
+	--lrti-border-light: #d9dde3;
+	--lrti-field-border: #cfd4da;
+	--lrti-text-dark: #1b1b1b;
+	--lrti-muted: #666666;
+	--lrti-radius: 12px;
+	--lrti-shadow: 0 1px 3px rgba( 17, 17, 17, 0.08 );
+	--lrti-shadow-hover: 0 12px 28px rgba( 17, 17, 17, 0.16 );
+
+	color: var( --lrti-dark );
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	box-sizing: border-box;
+}
+
+.lrti-archive *,
+.lrti-archive *::before,
+.lrti-archive *::after {
+	box-sizing: inherit;
+}
+
+.lrti-container {
+	max-width: 1460px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* ---- Header -------------------------------------------------------------- */
+
+.lrti-archive-header {
+	background: var( --lrti-navy );
+	color: var( --lrti-white );
+	padding: 40px 0;
+	margin-bottom: 32px;
+}
+
+.lrti-archive-title {
+	margin: 0;
+	font-size: 2rem;
+	line-height: 1.15;
+	color: var( --lrti-white );
+}
+
+.lrti-archive-desc {
+	margin: 10px 0 0;
+	max-width: 70ch;
+	color: rgba( 255, 255, 255, 0.82 );
+	font-size: 1rem;
+}
+
+/* ---- Layout: sidebar + main --------------------------------------------- */
+
+.lrti-layout {
+	display: grid;
+	grid-template-columns: 310px 1fr;
+	gap: 36px;
+	align-items: start;
+	padding-bottom: 56px;
+}
+
+.lrti-sidebar {
+	position: sticky;
+	top: 20px;
+}
+
+.lrti-filter-placeholder {
+	background: var( --lrti-white );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	padding: 20px;
+	box-shadow: var( --lrti-shadow );
+}
+
+.lrti-sidebar-title {
+	margin: 0 0 8px;
+	font-size: 1.1rem;
+	padding-bottom: 10px;
+	border-bottom: 2px solid var( --lrti-accent );
+}
+
+.lrti-sidebar-note {
+	margin: 10px 0 0;
+	color: var( --lrti-muted );
+	font-size: 0.9rem;
+}
+
+/* ---- Toolbar (count + sort) --------------------------------------------- */
+
+.lrti-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 20px;
+}
+
+.lrti-results-count {
+	margin: 0;
+	font-weight: 600;
+	color: var( --lrti-dark );
+}
+
+.lrti-sort {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.lrti-sort-label {
+	font-size: 0.9rem;
+	color: var( --lrti-muted );
+}
+
+.lrti-sort-select {
+	padding: 8px 10px;
+	border: 1px solid var( --lrti-border );
+	border-radius: 8px;
+	background: var( --lrti-white );
+	font-size: 0.9rem;
+	color: var( --lrti-dark );
+	max-width: 220px;
+}
+
+/* ---- Grid --------------------------------------------------------------- */
+
+.lrti-grid {
+	display: grid;
+	grid-template-columns: repeat( 3, 1fr );
+	gap: 24px;
+}
+
+/* Column modifiers used by the shortcodes (desktop N → tablet 2 → mobile 1). */
+.lrti-grid--cols-1 {
+	grid-template-columns: 1fr;
+}
+
+.lrti-grid--cols-2 {
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+}
+
+.lrti-grid--cols-3 {
+	grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
+}
+
+.lrti-grid--cols-4 {
+	grid-template-columns: repeat( 4, minmax( 0, 1fr ) );
+}
+
+@media ( max-width: 1024px ) {
+	.lrti-grid--cols-3,
+	.lrti-grid--cols-4 {
+		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	}
+}
+
+@media ( max-width: 600px ) {
+	.lrti-grid--cols-2,
+	.lrti-grid--cols-3,
+	.lrti-grid--cols-4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---- Card --------------------------------------------------------------- */
+
+.lrti-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: var( --lrti-white );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	overflow: hidden;
+	box-shadow: var( --lrti-shadow );
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lrti-card:hover,
+.lrti-card:focus-within {
+	transform: translateY( -5px );
+	box-shadow: var( --lrti-shadow-hover );
+}
+
+.lrti-card-media {
+	position: relative;
+	aspect-ratio: 4 / 3;
+	background: var( --lrti-light );
+	overflow: hidden;
+}
+
+.lrti-card-imglink {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.lrti-card-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.lrti-card-img--placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: var( --lrti-navy );
+}
+
+.lrti-card-img--placeholder svg {
+	width: 55%;
+	height: auto;
+}
+
+/* Badges over the image */
+.lrti-badges {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	pointer-events: none;
+}
+
+.lrti-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 999px;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: var( --lrti-white, #ffffff );
+	background: var( --lrti-navy, #101820 );
+	box-shadow: var( --lrti-shadow, 0 1px 2px rgba( 0, 0, 0, 0.15 ) );
+}
+
+/* Condition badges (New = dark navy, Used = muted gray). */
+.lrti-badge--cond.lrti-cond-new,
+.lrti-badge.lrti-cond-new {
+	background: var( --lrti-navy, #101820 );
+	color: #ffffff;
+}
+
+.lrti-badge--cond.lrti-cond-used,
+.lrti-badge.lrti-cond-used {
+	background: #6b7280;
+	color: #ffffff;
+}
+
+.lrti-badge--featured {
+	background: var( --lrti-accent, #d4a15a );
+	color: var( --lrti-dark, #111111 );
+}
+
+.lrti-badge--sale {
+	background: var( --lrti-primary, #a8321d );
+	color: #ffffff;
+}
+
+.lrti-badge--avail {
+	margin-left: auto;
+	background: #2f6f3b;
+}
+
+/* Availability color hints by slug (fall back to green). */
+.lrti-badge.lrti-avail-sold {
+	background: #6f2115;
+}
+
+.lrti-badge.lrti-avail-sale-pending,
+.lrti-badge.lrti-avail-coming-soon {
+	background: #8a6d1f;
+}
+
+/* ---- Card body ---------------------------------------------------------- */
+
+.lrti-card-body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
+	flex: 1 1 auto;
+}
+
+.lrti-card-type {
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: var( --lrti-primary );
+}
+
+.lrti-card-title {
+	margin: 0;
+	font-size: 1.1rem;
+	line-height: 1.25;
+}
+
+.lrti-card-title a {
+	color: var( --lrti-dark );
+	text-decoration: none;
+}
+
+.lrti-card-title a:hover,
+.lrti-card-title a:focus {
+	color: var( --lrti-primary );
+	text-decoration: underline;
+}
+
+.lrti-card-sub {
+	margin: 0;
+	color: var( --lrti-muted );
+	font-size: 0.9rem;
+}
+
+.lrti-card-price {
+	margin: 2px 0;
+	font-size: 1.35rem;
+	font-weight: 800;
+	color: var( --lrti-primary );
+}
+
+.lrti-price--call {
+	font-size: 1.05rem;
+	color: var( --lrti-navy );
+}
+
+.lrti-price-was {
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: var( --lrti-muted );
+	text-decoration: line-through;
+	margin-left: 6px;
+}
+
+.lrti-card-specs {
+	list-style: none;
+	margin: 4px 0;
+	padding: 10px 0;
+	border-top: 1px solid var( --lrti-border );
+	border-bottom: 1px solid var( --lrti-border );
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 18px;
+}
+
+.lrti-card-specs li {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.2;
+}
+
+.lrti-spec-label {
+	font-size: 0.72rem;
+	letter-spacing: 0.01em;
+	color: var( --lrti-muted );
+}
+
+.lrti-spec-value {
+	font-weight: 700;
+	font-size: 0.95rem;
+}
+
+.lrti-card-excerpt {
+	margin: 0;
+	color: var( --lrti-muted );
+	font-size: 0.88rem;
+}
+
+/* Content above the pinned bottom section flows naturally. */
+.lrti-card-main {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex: 0 0 auto;
+}
+
+/* Bottom section is pushed to the card's base so every card lines up. */
+.lrti-card-bottom {
+	margin-top: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding-top: 10px;
+}
+
+/* Stock number sits directly above the price. */
+.lrti-card-stock {
+	font-size: 0.8rem;
+	color: var( --lrti-muted );
+}
+
+/* Footer row: price on the left, View Details on the right. */
+.lrti-card-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	flex-wrap: wrap;
+}
+
+.lrti-card-price-wrap {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.lrti-card-bottom .lrti-card-price {
+	margin: 0;
+}
+
+.lrti-card-btn {
+	flex: 0 0 auto;
+	margin-left: auto;
+}
+
+/* ---- Buttons ------------------------------------------------------------ */
+
+.lrti-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 10px 16px;
+	border: 2px solid transparent;
+	border-radius: 8px;
+	font-weight: 700;
+	font-size: 0.9rem;
+	line-height: 1;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.lrti-btn--primary {
+	background: var( --lrti-primary );
+	color: var( --lrti-white );
+}
+
+.lrti-btn--primary:hover,
+.lrti-btn--primary:focus {
+	background: var( --lrti-primary-dark );
+	color: var( --lrti-white );
+}
+
+.lrti-btn--small {
+	padding: 8px 12px;
+	font-size: 0.85rem;
+	background: var( --lrti-navy );
+	color: var( --lrti-white );
+}
+
+.lrti-btn--small:hover,
+.lrti-btn--small:focus {
+	background: var( --lrti-dark );
+	color: var( --lrti-white );
+}
+
+.lrti-card-btn {
+	flex: 0 0 auto;
+}
+
+/* ---- Focus states (accessibility) --------------------------------------- */
+
+.lrti-archive a:focus-visible,
+.lrti-archive button:focus-visible,
+.lrti-archive select:focus-visible {
+	outline: 3px solid var( --lrti-accent );
+	outline-offset: 2px;
+}
+
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect( 0, 0, 0, 0 );
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ---- Pagination --------------------------------------------------------- */
+
+.lrti-pagination {
+	margin-top: 32px;
+}
+
+.lrti-pagination .page-numbers {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	padding: 0;
+	margin: 0;
+	justify-content: center;
+}
+
+.lrti-pagination .page-numbers li {
+	margin: 0;
+}
+
+.lrti-pagination a.page-numbers,
+.lrti-pagination span.page-numbers {
+	display: inline-block;
+	min-width: 40px;
+	text-align: center;
+	padding: 8px 12px;
+	border: 1px solid var( --lrti-border );
+	border-radius: 8px;
+	background: var( --lrti-white );
+	color: var( --lrti-dark );
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.lrti-pagination a.page-numbers:hover,
+.lrti-pagination a.page-numbers:focus {
+	border-color: var( --lrti-primary );
+	color: var( --lrti-primary );
+}
+
+.lrti-pagination span.page-numbers.current {
+	background: var( --lrti-primary );
+	border-color: var( --lrti-primary );
+	color: var( --lrti-white );
+}
+
+/* ---- Empty state -------------------------------------------------------- */
+
+.lrti-empty {
+	text-align: center;
+	padding: 56px 20px;
+	background: var( --lrti-white );
+	border: 1px solid var( --lrti-border );
+	border-radius: var( --lrti-radius );
+	box-shadow: var( --lrti-shadow );
+}
+
+.lrti-empty-icon {
+	display: inline-block;
+	width: 120px;
+	color: var( --lrti-navy );
+	opacity: 0.8;
+}
+
+.lrti-empty-icon svg {
+	width: 100%;
+	height: auto;
+}
+
+.lrti-empty-title {
+	margin: 12px 0 6px;
+	font-size: 1.5rem;
+}
+
+.lrti-empty-text {
+	margin: 0 0 18px;
+	color: var( --lrti-muted );
+}
+
+/* ---- Responsive --------------------------------------------------------- */
+
+@media ( max-width: 1024px ) {
+	.lrti-layout {
+		grid-template-columns: 240px 1fr;
+		gap: 24px;
+	}
+
+	.lrti-grid {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+@media ( max-width: 782px ) {
+	.lrti-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-sidebar {
+		position: static;
+	}
+
+	.lrti-grid {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+@media ( max-width: 560px ) {
+	.lrti-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.lrti-archive-title {
+		font-size: 1.6rem;
+	}
+
+	.lrti-toolbar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+/* Respect reduced-motion preferences. */
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-card {
+		transition: none;
+	}
+}
+
+/* ---- Sprint 4.4: card polish (image zoom + savings) --------------------- */
+
+.lrti-card-media .lrti-card-img {
+	transition: transform 0.25s ease;
+}
+
+.lrti-card:hover .lrti-card-media .lrti-card-img,
+.lrti-card:focus-within .lrti-card-media .lrti-card-img {
+	transform: scale( 1.04 );
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-card-media .lrti-card-img {
+		transition: none;
+	}
+	.lrti-card:hover .lrti-card-media .lrti-card-img {
+		transform: none;
+	}
+}
+
+.lrti-card-savings {
+	margin: 2px 0 0;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #2f6f3b;
+}
+
+/* ---- Sprint 1.10.0: featured-inventory section --------------------------- */
+
+.lrti-featured-section {
+	margin: 0 auto;
+}
+
+.lrti-featured-head {
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.lrti-featured-eyebrow {
+	margin: 0 0 6px;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var( --lrti-primary );
+}
+
+.lrti-featured-eyebrow::after {
+	content: "";
+	display: block;
+	width: 48px;
+	height: 3px;
+	margin: 8px auto 0;
+	background: var( --lrti-accent );
+	border-radius: 2px;
+}
+
+.lrti-featured-heading {
+	margin: 0;
+	font-size: 1.9rem;
+	line-height: 1.2;
+	color: var( --lrti-dark );
+}
+
+.lrti-featured-empty {
+	text-align: center;
+	color: var( --lrti-muted );
+	padding: 16px;
+}
+
+@media ( max-width: 600px ) {
+	.lrti-featured-heading {
+		font-size: 1.5rem;
+	}
+}
+
+/* ==== Sprint 2.4.0: archive UX & responsive polish ======================= */
+
+/* Give the results grid a touch more breathing room on desktop. */
+.lrti-inventory-main .lrti-grid {
+	gap: 26px;
+}
+
+/* Mobile refinements. */
+@media ( max-width: 600px ) {
+	/* Reduce the large gap between the archive header and the toolbar (~50%). */
+	.lrti-archive-header {
+		padding: 24px 0;
+		margin-bottom: 16px;
+	}
+
+	.lrti-layout {
+		gap: 18px;
+		padding-bottom: 36px;
+	}
+
+	/* Cards nearly fill the screen with ~16px page padding. */
+	.lrti-container {
+		padding: 0 16px;
+	}
+
+	/* Shorter card image (~15%) so the title and price appear sooner. */
+	.lrti-card-media {
+		aspect-ratio: 16 / 10;
+	}
+
+	/* Slightly larger price for readability (~34px). */
+	.lrti-card-price {
+		font-size: 2.1rem;
+	}
+
+	/* Full-width, thumb-friendly View Details button. */
+	.lrti-card-footer {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 8px;
+	}
+
+	.lrti-card-btn {
+		flex: 1 1 auto;
+		width: 100%;
+		margin-left: 0;
+		padding: 12px 16px;
+	}
+
+	/* Full-width filter toggle + a compact results header. */
+	.lrti-filter-toggle {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.lrti-results-header {
+		gap: 10px;
+	}
+}
+
+/* ==== Sprint 2.5.0: sort layout, brand buttons, spec accordion =========== */
+
+/* Section 1 — keep the whole sort control on one line. */
+.lrti-sort-controls {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: nowrap;
+}
+
+.lrti-sort-controls .lrti-sort-label {
+	white-space: nowrap;
+	margin: 0;
+}
+
+.lrti-sort-controls .lrti-sort-select {
+	min-width: 0;
+	flex: 0 1 auto;
+}
+
+@media ( max-width: 480px ) {
+	/* Allow the group to wrap as one unit, but never split the label. */
+	.lrti-results-header {
+		flex-wrap: wrap;
+	}
+}
+
+/* Section 2 — force the dealership red/brown on all filter controls so the
+   theme/Elementor accent (pink) can never bleed through. Primary = filled,
+   secondary/outline = white with a red/brown border and text. */
+.lrti-archive .lrti-btn--primary,
+.lrti-archive .lrti-apply,
+.lrti-archive .lrti-filter-toggle {
+	background: var( --lrti-primary );
+	border: 2px solid var( --lrti-primary );
+	color: #fff;
+}
+
+.lrti-archive .lrti-btn--primary:hover,
+.lrti-archive .lrti-btn--primary:focus,
+.lrti-archive .lrti-apply:hover,
+.lrti-archive .lrti-apply:focus,
+.lrti-archive .lrti-filter-toggle:hover,
+.lrti-archive .lrti-filter-toggle:focus {
+	background: var( --lrti-primary-dark );
+	border-color: var( --lrti-primary-dark );
+	color: #fff;
+}
+
+.lrti-archive .lrti-btn--outline,
+.lrti-archive .lrti-reset,
+.lrti-archive .lrti-sort .lrti-btn,
+.lrti-archive .lrti-chip-clear {
+	background: #fff;
+	border: 2px solid var( --lrti-primary );
+	color: var( --lrti-primary );
+}
+
+.lrti-archive .lrti-btn--outline:hover,
+.lrti-archive .lrti-btn--outline:focus,
+.lrti-archive .lrti-reset:hover,
+.lrti-archive .lrti-reset:focus,
+.lrti-archive .lrti-sort .lrti-btn:hover,
+.lrti-archive .lrti-sort .lrti-btn:focus,
+.lrti-archive .lrti-chip-clear:hover,
+.lrti-archive .lrti-chip-clear:focus {
+	background: var( --lrti-primary );
+	border-color: var( --lrti-primary );
+	color: #fff;
+}
+
+/* Active-filter remove buttons: brand color, never pink. */
+.lrti-archive .lrti-chip-remove {
+	color: var( --lrti-primary );
+}
+
+.lrti-archive .lrti-chip-remove:hover,
+.lrti-archive .lrti-chip-remove:focus {
+	color: var( --lrti-primary-dark );
+}
+
+/* Visible keyboard focus on every archive control. */
+.lrti-archive .lrti-btn:focus-visible,
+.lrti-archive .lrti-spec-filter-toggle:focus-visible,
+.lrti-archive .lrti-chip-remove:focus-visible {
+	outline: 2px solid var( --lrti-primary-dark );
+	outline-offset: 2px;
+}
+
+/* Section 6 — compact, consistent sidebar spacing. */
+.lrti-sidebar .lrti-filter-section {
+	margin-bottom: 14px;
+	padding-bottom: 12px;
+}
+
+.lrti-sidebar .lrti-filter-legend {
+	margin-bottom: 8px;
+}
+
+.lrti-sidebar .lrti-filter-group {
+	margin-bottom: 10px;
+}
+
+.lrti-filter-actions {
+	margin-top: 6px;
+}
+
+/* ==== Sprint 2.6.2: spec-filter accordion — match admin, kill theme bleed ==
+
+   Every rule is scoped under .lrti-inventory so it outranks theme/Elementor
+   button styling, and the toggle + its children are hard-reset so nothing can
+   draw a second border, outline, or pink box around the label. Neutral gray
+   rows with a small GRAY disclosure triangle; brand red/brown only on focus,
+   the open-state accent, and the active count. No pink anywhere. */
+
+.lrti-inventory {
+	--lrti-brand-primary: var( --lrti-primary, #a8321d );
+	--lrti-brand-primary-hover: var( --lrti-primary-dark, #842615 );
+	--lrti-brand-gold: var( --lrti-accent, #d69a3a );
+	--lrti-spec-bg: #f3f4f5;
+	--lrti-spec-bg-hover: #e9eaec;
+	--lrti-spec-bg-open: rgba( 168, 50, 29, 0.08 );
+	--lrti-spec-border: #cfd3d7;
+	--lrti-spec-border-hover: #b8bdc2;
+	--lrti-spec-tri: #646970;
+	--lrti-text-strong: #222222;
+}
+
+.lrti-inventory .lrti-spec-filter-groups {
+	margin-top: 4px;
+}
+
+.lrti-inventory .lrti-spec-filter-group {
+	margin: 0 0 8px;
+	padding: 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+}
+
+.lrti-inventory .lrti-spec-filter-heading {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	font-size: 14px;
+	line-height: 1.3;
+}
+
+/* The single full-width bordered row. Hard reset against theme button styles. */
+.lrti-inventory .lrti-spec-filter-toggle {
+	-webkit-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	width: 100%;
+	min-height: 38px;
+	margin: 0;
+	padding: 8px 12px;
+	background: var( --lrti-spec-bg ) !important;
+	color: var( --lrti-text-strong ) !important;
+	border: 1px solid var( --lrti-spec-border ) !important;
+	border-radius: 2px;
+	box-shadow: none !important;
+	outline: 0;
+	text-align: left;
+	text-transform: none;
+	letter-spacing: normal;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.3;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.lrti-inventory .lrti-spec-filter-toggle:hover {
+	background: var( --lrti-spec-bg-hover ) !important;
+	color: var( --lrti-text-strong ) !important;
+	border-color: var( --lrti-spec-border-hover ) !important;
+}
+
+/* Kill any theme/Elementor pink applied on :focus / :active — force the neutral
+   background and dark text on every interactive state. The brand outline below
+   is the only focus decoration. */
+.lrti-inventory .lrti-spec-filter-toggle:focus,
+.lrti-inventory .lrti-spec-filter-toggle:active {
+	background: var( --lrti-spec-bg ) !important;
+	color: var( --lrti-text-strong ) !important;
+	border-color: var( --lrti-spec-border ) !important;
+	box-shadow: none !important;
+}
+
+.lrti-inventory .lrti-spec-filter-toggle:focus-visible {
+	outline: 2px solid var( --lrti-brand-primary ) !important;
+	outline-offset: 2px;
+	background: var( --lrti-spec-bg ) !important;
+	color: var( --lrti-text-strong ) !important;
+	box-shadow: none !important;
+}
+
+/* Open state wins over the neutral focus/active background above. */
+.lrti-inventory .lrti-spec-filter-group.is-open .lrti-spec-filter-toggle,
+.lrti-inventory .lrti-spec-filter-group.is-open .lrti-spec-filter-toggle:focus,
+.lrti-inventory .lrti-spec-filter-group.is-open .lrti-spec-filter-toggle:active {
+	background: var( --lrti-spec-bg-open ) !important;
+	color: var( --lrti-text-strong ) !important;
+	border-radius: 2px 2px 0 0;
+	border-bottom-color: var( --lrti-spec-border ) !important;
+}
+
+/* Small GRAY disclosure triangle on the left; brand tint only when open. */
+.lrti-inventory .lrti-spec-filter-chevron {
+	flex: 0 0 auto;
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 7px solid var( --lrti-spec-tri );
+	background: none !important;
+	box-shadow: none !important;
+	transition: transform 0.15s ease;
+}
+
+.lrti-inventory .lrti-spec-filter-toggle[aria-expanded="true"] .lrti-spec-filter-chevron {
+	transform: rotate( 90deg );
+	border-left-color: var( --lrti-brand-primary-hover );
+}
+
+/* The title is plain text — no border, background, width-shrink, or box. */
+.lrti-inventory .lrti-spec-filter-title,
+.lrti-inventory .lrti-spec-filter-toggle .lrti-spec-filter-title:hover,
+.lrti-inventory .lrti-spec-filter-toggle .lrti-spec-filter-title:focus {
+	display: block;
+	flex: 1 1 auto;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+	background: transparent !important;
+	color: inherit !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	outline: 0 !important;
+	font: inherit;
+	text-transform: none;
+}
+
+/* Subtle active-count indicator (brand), pushed to the right edge. */
+.lrti-inventory .lrti-spec-filter-count {
+	flex: 0 0 auto;
+	margin-left: auto;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 9px;
+	background: var( --lrti-brand-primary );
+	color: #fff !important;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 18px;
+	text-align: center;
+}
+
+.lrti-inventory .lrti-spec-filter-panel {
+	padding: 12px;
+	border: 1px solid var( --lrti-spec-border );
+	border-top: 0;
+	background: #fff;
+}
+
+.lrti-inventory .lrti-spec-filter-panel[hidden] {
+	display: none;
+}
+
+.lrti-inventory .lrti-spec-filter-panel .lrti-input,
+.lrti-inventory .lrti-spec-filter-panel .lrti-select {
+	border: 1px solid var( --lrti-spec-border );
+	background: #fff;
+	color: var( --lrti-text-strong );
+}
+
+.lrti-inventory .lrti-spec-filter-panel .lrti-input:focus,
+.lrti-inventory .lrti-spec-filter-panel .lrti-select:focus {
+	border-color: var( --lrti-brand-primary );
+	box-shadow: 0 0 0 2px rgba( 168, 50, 29, 0.15 );
+	outline: none;
+}
+
+.lrti-inventory input[type="checkbox"],
+.lrti-inventory input[type="radio"] {
+	accent-color: var( --lrti-brand-primary );
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.lrti-inventory .lrti-spec-filter-chevron,
+	.lrti-inventory .lrti-spec-filter-toggle {
+		transition: none;
+	}
+}
+
+/* ==== Sprint 2.9.7: Trailer Type archive (breadcrumb, hero, empty, content) */
+.lrti-taxarchive .lrti-breadcrumb {
+	padding: 18px 0 0;
+	font-size: 13px;
+	color: #5d6873;
+}
+
+.lrti-taxarchive .lrti-breadcrumb a {
+	color: var( --lrti-primary, #a8321d );
+	text-decoration: none;
+}
+
+.lrti-taxarchive .lrti-breadcrumb a:hover {
+	color: var( --lrti-primary-dark, #842615 );
+	text-decoration: underline;
+}
+
+.lrti-taxarchive .lrti-breadcrumb-sep {
+	margin: 0 8px;
+	color: #c8ced4;
+}
+
+/* Category empty state. */
+.lrti-taxarchive-empty {
+	text-align: center;
+	padding: 48px 20px 56px;
+	background: #f8f9fa;
+	border: 1px solid #d9dee3;
+	border-radius: 12px;
+	margin: 8px 0 28px;
+}
+
+.lrti-taxarchive-empty-title {
+	margin: 0 0 10px;
+	font-size: 24px;
+	font-weight: 700;
+	color: #17212b;
+}
+
+.lrti-taxarchive-empty-text {
+	margin: 0 auto 20px;
+	max-width: 560px;
+	font-size: 15px;
+	line-height: 1.6;
+	color: #5d6873;
+}
+
+.lrti-taxarchive-empty-actions {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0;
+}
+
+/* About content below listings. */
+.lrti-taxarchive-content {
+	padding: 32px 0 8px;
+}
+
+.lrti-taxarchive-content-title {
+	margin: 0 0 12px;
+	font-size: 24px;
+	font-weight: 700;
+	color: #17212b;
+}
+
+.lrti-taxarchive-content-body {
+	max-width: 820px;
+	font-size: 15px;
+	line-height: 1.7;
+	color: #3a4550;
+}
+
+/* ==== Sprint 2.9.8: Unified public hero =================================== */
+.lrti-hero {
+	/* The hero renders outside .lrti-archive/.lrti-single, so it needs its own
+	   copy of the brand variables — otherwise var() badge colors resolve to
+	   nothing (only hardcoded-hex badges like In Stock would show). */
+	--lrti-primary: #a8321d;
+	--lrti-primary-dark: #842615;
+	--lrti-dark: #111111;
+	--lrti-navy: #101820;
+	--lrti-accent: #d4a15a;
+	--lrti-white: #ffffff;
+	--lrti-shadow: 0 1px 2px rgba( 0, 0, 0, 0.15 );
+	background: var( --lrti-navy, #101820 );
+	color: var( --lrti-white, #ffffff );
+	padding: 60px 0;
+	margin-bottom: 40px;
+}
+
+.lrti-hero-inner {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 24px;
+	flex-wrap: wrap;
+}
+
+.lrti-hero-body {
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.lrti-hero-breadcrumbs {
+	margin-bottom: 14px;
+}
+
+.lrti-hero-crumbs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	font-size: 0.8125rem;
+}
+
+.lrti-hero-crumb {
+	display: inline-flex;
+	align-items: center;
+	color: rgba( 255, 255, 255, 0.7 );
+}
+
+.lrti-hero-crumb a {
+	color: rgba( 255, 255, 255, 0.85 );
+	text-decoration: none;
+}
+
+.lrti-hero-crumb a:hover,
+.lrti-hero-crumb a:focus {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.lrti-hero-crumb [aria-current="page"] {
+	color: #fff;
+}
+
+.lrti-hero-crumb-sep {
+	margin: 0 8px;
+	color: rgba( 255, 255, 255, 0.4 );
+}
+
+.lrti-hero-title {
+	margin: 0;
+	font-size: 2.25rem;
+	line-height: 1.15;
+	font-weight: 800;
+	color: #fff;
+}
+
+.lrti-hero-desc {
+	margin: 12px 0 0;
+	max-width: 70ch;
+	font-size: 1.05rem;
+	line-height: 1.6;
+	color: rgba( 255, 255, 255, 0.82 );
+}
+
+.lrti-hero-meta {
+	list-style: none;
+	margin: 16px 0 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 28px;
+}
+
+.lrti-hero-meta-item {
+	font-size: 0.95rem;
+	color: rgba( 255, 255, 255, 0.9 );
+}
+
+.lrti-hero-meta-label {
+	color: rgba( 255, 255, 255, 0.6 );
+	margin-right: 6px;
+}
+
+.lrti-hero-meta-value {
+	font-weight: 600;
+}
+
+.lrti-hero-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+}
+
+/* Reset the card-only right-align so hero badges group naturally. */
+.lrti-hero-badges .lrti-badge,
+.lrti-hero-badges .lrti-badge--avail {
+	margin-left: 0;
+}
+
+/* On the dark hero, a navy "New" badge would blend in — lift it to a visible
+   navy-slate. Card badges (on light backgrounds) keep the original navy. */
+.lrti-hero .lrti-badge.lrti-cond-new {
+	background: #33445a;
+}
+
+/* Extra status colors requested for the hero (kept color-coded). */
+.lrti-badge.lrti-cond-used {
+	background: #6b7280;
+}
+
+.lrti-badge.lrti-avail-coming-soon {
+	background: #5d6b7a;
+}
+
+/* Trailer Type archive: count + back toolbar sits below the hero. */
+.lrti-taxarchive-toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.lrti-taxarchive-toolbar .lrti-taxarchive-count {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	color: var( --lrti-primary, #a8321d );
+}
+
+@media ( max-width: 782px ) {
+	.lrti-hero {
+		padding: 40px 0;
+		margin-bottom: 28px;
+	}
+	.lrti-hero-inner {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.lrti-hero-title {
+		font-size: 1.75rem;
+	}
+	.lrti-hero-badges {
+		margin-top: 6px;
+	}
+}
+
+/* ==== Sprint 2.9.10: Featured trailers carousel ========================= */
+.lrti-carousel {
+	position: relative;
+	padding: 0 8px;
+}
+
+.lrti-carousel-viewport {
+	overflow: hidden;
+}
+
+.lrti-carousel-track {
+	display: flex;
+	margin: 0 -10px;
+	will-change: transform;
+}
+
+.lrti-carousel-slide {
+	flex: 0 0 25%;
+	max-width: 25%;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+.lrti-carousel-slide .lrti-card {
+	height: 100%;
+}
+
+/* Prev / next controls. */
+.lrti-carousel-nav,
+.lrti-carousel-nav:link,
+.lrti-carousel-nav:visited,
+.lrti-carousel-nav:hover,
+.lrti-carousel-nav:focus,
+.lrti-carousel-nav:focus-visible,
+.lrti-carousel-nav:active {
+	position: absolute;
+	top: 50%;
+	transform: translateY( -50% );
+	z-index: 3;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border-radius: 50%;
+	border: none !important;
+	/* Force brand red across every state — some themes/Elementor style all
+	   <button> elements (and their :focus/:active) with their own accent,
+	   which is why the arrows were showing pink. Scoped to this button only. */
+	background-color: #a8321d !important;
+	background-image: none !important;
+	color: #ffffff !important;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba( 17, 24, 32, 0.2 );
+	text-shadow: none;
+	transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.lrti-carousel-nav svg {
+	display: block;
+	width: 22px;
+	height: 22px;
+	stroke: #ffffff;
+}
+
+.lrti-carousel-nav:hover,
+.lrti-carousel-nav:focus,
+.lrti-carousel-nav:focus-visible,
+.lrti-carousel-nav:active {
+	background-color: #842615 !important;
+	color: #ffffff !important;
+	outline: none;
+}
+
+.lrti-carousel-nav:focus-visible {
+	box-shadow: 0 0 0 3px rgba( 168, 50, 29, 0.35 );
+}
+
+.lrti-carousel-nav:focus-visible {
+	box-shadow: 0 0 0 3px rgba( 168, 50, 29, 0.35 );
+}
+
+.lrti-carousel-prev {
+	left: -6px;
+}
+
+.lrti-carousel-next {
+	right: -6px;
+}
+
+/* Responsive slide widths (mirrors the JS visible count). */
+@media ( max-width: 1023px ) {
+	.lrti-carousel-slide {
+		flex-basis: 50%;
+		max-width: 50%;
+	}
+}
+
+@media ( max-width: 599px ) {
+	.lrti-carousel-slide {
+		flex-basis: 100%;
+		max-width: 100%;
+	}
+	.lrti-carousel-nav {
+		width: 38px;
+		height: 38px;
+	}
+	.lrti-carousel-nav svg {
+		width: 18px;
+		height: 18px;
+	}
+	.lrti-carousel-prev {
+		left: 0;
+	}
+	.lrti-carousel-next {
+		right: 0;
+	}
+}
